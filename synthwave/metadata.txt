@@ -1,9 +1,0 @@
-[general]
-name=Synthwave Code Editor Color Scheme
-description=Synthwave color scheme for QGIS code editors. Originally developed by robb0wen for VS Code at https://github.com/robb0wen/synthwave-vscode.
-about=Synthwave color scheme for QGIS code editors. Originally developed by robb0wen for VS Code at https://github.com/robb0wen/synthwave-vscode.
-version=1.0
-qgisMinimumVersion=3.15
-author=Nyall Dawson
-email=nyall.dawson@gmail.com
-repository=
