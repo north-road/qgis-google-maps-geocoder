@@ -23,7 +23,8 @@ from qgis.PyQt.QtWidgets import (
 from qgis.core import (
     QgsGoogleMapsGeocoder,
     QgsSettings,
-    Qgis
+    Qgis,
+    QgsApplication
 )
 from qgis.gui import (
     QgsOptionsPageWidget,
@@ -32,7 +33,7 @@ from qgis.gui import (
 )
 
 from google_maps_geocoder.gui_utils import GuiUtils
-
+from google_maps_geocoder.processing.provider import GoogleMapsProvider
 
 def classFactory(iface):
     return GoogleMapsGeocoderPlugin(iface)
@@ -355,6 +356,9 @@ class GoogleMapsGeocoderPlugin:
             "zw": self.tr("Zimbabwe"),
         }
 
+        # processing framework
+        self.provider = GoogleMapsProvider()
+
     @staticmethod
     def tr(message):
         """Get the translation for a string using Qt translation API.
@@ -370,7 +374,12 @@ class GoogleMapsGeocoderPlugin:
         # noinspection PyTypeChecker,PyArgumentList,PyCallByClass
         return QCoreApplication.translate('GoogleMapsGeocoder', message)
 
+    def initProcessing(self):
+        """Create the Processing provider"""
+        QgsApplication.processingRegistry().addProvider(self.provider)
+
     def initGui(self):
+        self.initProcessing()
         self.register()
 
         self.options_factory = GoogleMapsOptionsFactory(self)
@@ -380,6 +389,7 @@ class GoogleMapsGeocoderPlugin:
 
     def unload(self):
         self.unregister()
+        QgsApplication.processingRegistry().removeProvider(self.provider)
         self.iface.unregisterOptionsWidgetFactory(self.options_factory)
 
     def unregister(self):
@@ -393,6 +403,7 @@ class GoogleMapsGeocoderPlugin:
             self.geocoder = QgsGoogleMapsGeocoder(self.api_key, self.region)
             self.filter = QgsGeocoderLocatorFilter('Google', 'Google', 'addr', self.geocoder, self.iface.mapCanvas())
             self.iface.registerLocatorFilter(self.filter)
+            self.provider.set_config(self.api_key, self.region)
 
     def set_api_key(self, api_key):
         settings = QgsSettings()
