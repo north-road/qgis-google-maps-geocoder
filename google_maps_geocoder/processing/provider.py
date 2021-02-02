@@ -59,7 +59,7 @@ class GoogleMapsProvider(QgsProcessingProvider):
         """
         Provider plugin version
         """
-        return "0.0.2"
+        return "0.0.3"
 
     def id(self):
         """

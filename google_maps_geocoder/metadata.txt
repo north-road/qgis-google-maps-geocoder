@@ -2,7 +2,7 @@
 name=Google Maps Geocoder
 description=Adds a Google Maps geocoding/address search functionality to the locator bar. Requires a Google Maps API key!
 about=Adds a Google Maps geocoding/address search functionality to the locator bar. Requires a Google Maps API key!
-version=0.0.1
+version=0.0.3
 qgisMinimumVersion=3.17
 icon=icon.png
 author=Nyall Dawson
