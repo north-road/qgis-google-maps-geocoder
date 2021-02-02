@@ -9,3 +9,4 @@ author=Nyall Dawson
 email=nyall.dawson@gmail.com
 repository=https://github.com/north-road/qgis-google-maps-geocoder
 tracker=https://github.com/north-road/qgis-google-maps-geocoder
+changelog=Version 0.0.3 (2020-02-02) - Add batch geocode algorithm
